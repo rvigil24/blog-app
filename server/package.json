@@ -2,21 +2,31 @@
     "name": "atw-blog-api",
     "version": "1.0.0",
     "description": "Esta es una REST API desarrollada para la materia de ATW",
-    "main": "app/app.js",
+    "main": "app/server.js",
     "private": "true",
-    "type": "module",
     "scripts": {
-        "dev": "nodemon app/app.js",
+        "dev": "nodemon app/server.js",
         "start": "node index.js",
         "format": "prettier --write .",
-        "lint": "eslint --fix ."
+        "lint": "eslint --fix .",
+        "db:migrate": "sequelize db:migrate",
+        "db:seed": "sequelize db:seed:all"
+    },
+    "engines": {
+        "node": ">=14"
     },
     "keywords": [],
     "author": "Alejandro Higueros",
     "dependencies": {
         "bcrypt": "^5.1.0",
         "express": "^4.18.2",
+        "jsonwebtoken": "^8.5.1",
         "multer": "^1.4.5-lts.1",
+        "passport": "^0.6.0",
+        "passport-google-oauth": "^2.0.0",
+        "passport-google-plus-token": "^2.1.0",
+        "pg": "^8.8.0",
+        "pg-hstore": "^2.3.4",
         "sequelize": "^6.25.3"
     },
     "devDependencies": {
@@ -24,6 +34,8 @@
         "eslint": "^8.26.0",
         "eslint-config-prettier": "^8.5.0",
         "nodemon": "^2.0.20",
-        "prettier": "^2.7.1"
+        "prettier": "^2.7.1",
+        "sequelize-cli": "^6.5.2",
+        "sqlite3": "^5.1.2"
     }
 }

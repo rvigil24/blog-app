@@ -1,13 +1,29 @@
-import express from 'express'
+/* eslint-disable no-unused-vars */
+const express = require('express')
+const { router } = require('./routes/router')
 
 const app = express()
 
-app.get('/', (req, res) => {
-    return res.json({
-        data: 'hello world',
+// middlewares
+app.use(express.json())
+
+// enrutador general de api
+app.use('/api', router)
+
+// manejo de erorr 404, no encontrado
+app.use('*', (req, res) => {
+    return res.status(404).json({
+        error: 404,
+        message: 'not found',
     })
 })
 
-app.listen(3000, () => {
-    console.log(`Listening on PORT: ${3000}`)
+// manejo de excepciones
+app.use((err, req, res, _next) => {
+    console.log(err)
+    res.status(500).json({
+        error: err,
+    })
 })
+
+module.exports = app
