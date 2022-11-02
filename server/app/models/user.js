@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+const { mailer } = require('../utils')
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         /**

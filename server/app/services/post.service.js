@@ -1,36 +1,36 @@
-const { Post } = require('../models')
+const { Post } = require('../models');
 
 const list = async (catName, username) => {
     try {
-        let posts
+        let posts;
         if (username) {
-            posts = await Post.findAll({ username })
+            posts = await Post.findAll({ username });
         } else if (catName) {
-            posts = await Post.findAll({ categories: { $in: [catName] } })
+            posts = await Post.findAll({ categories: { $in: [catName] } });
         } else {
-            posts = await Post.findAll()
+            posts = await Post.findAll();
         }
-        return posts
+        return posts;
     } catch (ex) {
-        throw ex
+        throw ex;
     }
-}
+};
 
 const get = async (postId) => {
     try {
-        return await Post.findByPk(postId)
+        return await Post.findByPk(postId);
     } catch (ex) {
-        throw ex
+        throw ex;
     }
-}
+};
 
-const create = async (data) => {
+const create = async (data, userId) => {
     try {
-        return await Post.create({ ...data })
+        return await Post.create({ ...data, userId });
     } catch (ex) {
-        throw ex
+        throw ex;
     }
-}
+};
 
 const update = async (postId, data) => {
     try {
@@ -41,12 +41,12 @@ const update = async (postId, data) => {
                     id: postId,
                 },
             }
-        )
-        return await Post.findByPk(postId)
+        );
+        return await Post.findByPk(postId);
     } catch (ex) {
-        throw ex
+        throw ex;
     }
-}
+};
 
 const remove = async (postId) => {
     try {
@@ -54,11 +54,11 @@ const remove = async (postId) => {
             where: {
                 id: postId,
             },
-        })
+        });
     } catch (ex) {
-        throw ex
+        throw ex;
     }
-}
+};
 
 module.exports = {
     create,
@@ -66,4 +66,4 @@ module.exports = {
     get,
     update,
     remove,
-}
+};

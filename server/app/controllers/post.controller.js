@@ -1,101 +1,103 @@
-const { post: postService } = require('../services')
+const { post: postService } = require('../services');
 
 // para obtener lista de posts
 const getPostsList = async (req, res, next) => {
-    const catName = req.query.cat
-    const username = req.query.user
+    const catName = req.query.cat;
+    const username = req.query.user;
     try {
-        const posts = await postService.list(catName, username)
+        const posts = await postService.list(catName, username);
         return res.json({
             data: posts,
-        })
+        });
     } catch (ex) {
-        next(ex)
+        next(ex);
     }
-}
+};
 
 // para obtener posts por id
 const getPostById = async (req, res, next) => {
-    const { postId } = req.params
+    const { postId } = req.params;
     try {
-        const post = await postService.get(postId)
+        const post = await postService.get(postId);
         if (!post) {
             return res.status(404).json({
                 data: null,
                 message: 'Post not found',
-            })
+            });
         }
         return res.status(200).json({
             data: post,
-        })
+        });
     } catch (ex) {
-        next(ex)
+        next(ex);
     }
-}
+};
 
 // para crear un nuevo post
 const createPost = async (req, res, next) => {
-    const { body } = req
+    const { body, user } = req;
+    const photo = req.file?.path;
     try {
-        const savePost = await postService.create(body)
+        const savePost = await postService.create({ ...body, photo }, user.id);
         return res.status(201).json({
             data: savePost,
             message: 'post created succesfully',
-        })
+        });
     } catch (ex) {
-        next(ex)
+        next(ex);
     }
-}
+};
 
 // para actualizar un post
 const updatePost = async (req, res, next) => {
-    const { postId } = req.params
-    const { body } = req
+    const { postId } = req.params;
+    const { body } = req;
     try {
-        const post = await postService.get(postId)
+        const post = await postService.get(postId);
 
         // si el post no pertenece al usuario
         if (post.username !== body.username) {
             return res.status(401).json({
                 data: null,
                 message: 'not authorized',
-            })
+            });
         }
-        const updatePost = await postService.update(postId, body)
+        const updatePost = await postService.update(postId, body);
         return res.status(200).json({
             data: updatePost,
             message: 'post updated succefully',
-        })
+        });
     } catch (ex) {
-        next(ex)
+        next(ex);
     }
-}
+};
 
 // para eliminar post
 const deletePost = async (req, res, next) => {
-    const { postId } = req.params
-    const { username } = req.body
+    const { postId } = req.params;
+    const { username } = req.body;
     try {
-        const post = await postService.get(postId)
+        const post = await postService.get(postId);
+        // si el post no existe
         if (!post) {
             return res.status(404).json({
                 data: null,
                 message: 'Post not found',
-            })
+            });
         }
-
+        // si el post no pertenece al usuario
         if (post.username !== username) {
             return res.status(401).json({
                 data: null,
                 message: 'not authorized',
-            })
+            });
         }
-        await postService.remove(post.id)
-        return res.status(204).end()
+        await postService.remove(post.id);
+        return res.status(204).end();
     } catch (ex) {
-        next(ex)
+        next(ex);
     }
-}
+};
 
 module.exports = {
     getPostsList,
@@ -103,4 +105,4 @@ module.exports = {
     createPost,
     updatePost,
     deletePost,
-}
+};

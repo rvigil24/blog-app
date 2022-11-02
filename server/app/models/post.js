@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 'use strict';
 const { Model } = require('sequelize');
-// const Category = require('./category')
+const { mailer } = require('../utils');
 
 module.exports = (sequelize, DataTypes) => {
     class Post extends Model {
@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate({ Category, User }) {
             // define association here
-            // { Category: Category, Post: Post, User: User }
             Post.belongsTo(Category, {
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
             });
 
             Post.belongsTo(User, {
+                as: 'user',
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
             });
@@ -33,6 +33,17 @@ module.exports = (sequelize, DataTypes) => {
             categoryId: DataTypes.INTEGER,
         },
         {
+            hooks: {
+                afterCreate: async (post, options) => {
+                    const user = await sequelize.models.User.findByPk(
+                        post.userId
+                    );
+                    const to = user.email;
+                    const subject = 'Post creado exitosamente';
+                    const data = `El post ${post.title} fue creado exitosamente`;
+                    // await mailer.sendMail({ to, subject, data });
+                },
+            },
             sequelize,
             modelName: 'Post',
         }

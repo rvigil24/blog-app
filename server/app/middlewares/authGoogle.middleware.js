@@ -20,7 +20,7 @@ const googleStrategy = new GooglePlusTokenStrategy(
 
                 // creamos el usuario con los valores
                 user = await userService.create({
-                    email: email.value,
+                    email: email?.value,
                     username: displayName,
                     imageUrl: avatar?.value,
                 });
