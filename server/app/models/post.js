@@ -13,14 +13,21 @@ module.exports = (sequelize, DataTypes) => {
         static associate({ Category, User }) {
             // define association here
             Post.belongsTo(Category, {
+                as: 'category',
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
+                foreignKey: {
+                    name: 'categoryId',
+                },
             });
 
             Post.belongsTo(User, {
                 as: 'user',
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
+                foreignKey: {
+                    name: 'userId',
+                },
             });
         }
     }
@@ -41,11 +48,12 @@ module.exports = (sequelize, DataTypes) => {
                     const to = user.email;
                     const subject = 'Post creado exitosamente';
                     const data = `El post ${post.title} fue creado exitosamente`;
-                    // await mailer.sendMail({ to, subject, data });
+                    await mailer.sendMail({ to, subject, data });
                 },
             },
             sequelize,
             modelName: 'Post',
+            tableName: 'posts',
         }
     );
     return Post;

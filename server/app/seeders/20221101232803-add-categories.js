@@ -38,7 +38,7 @@ module.exports = {
          *   isBetaMember: false
          * }], {});
          */
-        await queryInterface.bulkInsert('Categories', categorias, {})
+        await queryInterface.bulkInsert('categories', categorias, {})
     },
 
     async down(queryInterface) {
@@ -48,7 +48,7 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-        await queryInterface.bulkDelete('Categories', {
+        await queryInterface.bulkDelete('categories', {
             [Op.or]: categorias,
         })
     },
