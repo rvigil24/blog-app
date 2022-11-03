@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
                     const to = user.email;
                     const subject = 'Post creado exitosamente';
                     const data = `El post ${post.title} fue creado exitosamente`;
-                    await mailer.sendMail({ to, subject, data });
+                    // await mailer.sendMail({ to, subject, data });
                 },
             },
             sequelize,
