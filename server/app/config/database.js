@@ -1,10 +1,10 @@
-require('dotenv').config()
-const path = require('path')
+require('dotenv').config();
+const path = require('path');
 
 module.exports = {
     development: {
         storage: `${path.resolve(process.cwd(), 'database.sqlite')}`,
-        logging: true,
+        logging: console.log    ,
         dialect: 'sqlite',
         seederStorage: 'sequelize',
     },
@@ -16,4 +16,4 @@ module.exports = {
         dialect: 'pg',
         seederStorage: 'sequelize',
     },
-}
+};

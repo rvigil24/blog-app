@@ -52,6 +52,7 @@ const createPost = async (req, res, next) => {
 const updatePost = async (req, res, next) => {
     const { postId } = req.params;
     const { body } = req;
+    const photo = req.file?.path;
     try {
         const post = await postService.get(postId);
 
@@ -62,6 +63,7 @@ const updatePost = async (req, res, next) => {
                 message: 'not authorized',
             });
         }
+        if (photo) body.photo = photo;
         const updatePost = await postService.update(postId, body);
         return res.status(200).json({
             data: updatePost,

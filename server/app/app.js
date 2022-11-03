@@ -22,9 +22,9 @@ app.use('*', (req, res) => {
 
 // manejo de excepciones
 app.use((err, req, res, _next) => {
-    console.log(err);
     res.status(500).json({
         error: err,
+        message: err.message,
     });
 });
 
