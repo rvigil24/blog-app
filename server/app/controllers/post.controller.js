@@ -36,7 +36,7 @@ const getPostById = async (req, res, next) => {
 // para crear un nuevo post
 const createPost = async (req, res, next) => {
     const { body, user } = req;
-    const photo = req.file?.path;
+    const photo = req.photoUrl;
     try {
         const savePost = await postService.create({ ...body, photo }, user.id);
         return res.status(201).json({
@@ -52,7 +52,7 @@ const createPost = async (req, res, next) => {
 const updatePost = async (req, res, next) => {
     const { postId } = req.params;
     const { body } = req;
-    const photo = req.file?.path;
+    const photo = req.photoUrl;
     try {
         const post = await postService.get(postId);
 

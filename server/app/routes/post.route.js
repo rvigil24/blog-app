@@ -15,6 +15,7 @@ postRouter.post(
     '/',
     authenticateToken,
     uploadFile.upload.single('photo'),
+    uploadFile.getPhotoUrl,
     postValidator.createPost,
     postController.createPost
 );
