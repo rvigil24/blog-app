@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate({ Post }) {
-            User.hasMany(Post);
+            // User.hasMany(Post, {
+            //     foreignKey: {
+            //         name: 'postId',
+            //     },
+            // });
         }
     }
     User.init(
@@ -30,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             sequelize,
             modelName: 'User',
-            tableName: 'users'
+            tableName: 'users',
         }
     );
     return User;
