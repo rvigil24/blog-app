@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-const { mailer } = require('../utils')
+const { mailer } = require('../utils');
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         /**
@@ -16,9 +16,18 @@ module.exports = (sequelize, DataTypes) => {
         {
             username: DataTypes.STRING,
             email: DataTypes.STRING,
-            imageUrl: DataTypes.STRING
+            imageUrl: DataTypes.STRING,
+            mfa: DataTypes.BOOLEAN,
         },
         {
+            hooks: {
+                afterCreate: async (user) => {
+                    const to = user.email;
+                    const subject = 'Cuenta creada';
+                    const data = `Hola ${user.username}, tu cuenta ha sido creada exitosamente`;
+                    await mailer.sendMail({ to, subject, data });
+                },
+            },
             sequelize,
             modelName: 'User',
         }
