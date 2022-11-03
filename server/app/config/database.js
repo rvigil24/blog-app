@@ -4,16 +4,16 @@ const path = require('path');
 module.exports = {
     development: {
         storage: `${path.resolve(process.cwd(), 'database.sqlite')}`,
-        logging: console.log    ,
+        logging: console.log,
         dialect: 'sqlite',
         seederStorage: 'sequelize',
     },
     production: {
-        username: 'root',
-        password: null,
-        database: 'database_production',
-        host: '127.0.0.1',
-        dialect: 'pg',
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME,
+        host: process.env.DB_HOST,
+        dialect: 'postgres',
         seederStorage: 'sequelize',
     },
 };
