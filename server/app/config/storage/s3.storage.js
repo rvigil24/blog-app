@@ -23,7 +23,8 @@ const s3Storage = multerS3({
         cb(null, { fieldName: fileName });
     },
     key: function (req, file, cb) {
-        cb(null, Date.now().toString());
+        const fileName = `${uuidv4()}${path.extname(file.originalname)}`;
+        cb(null, fileName);
     },
 });
 
