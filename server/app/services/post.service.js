@@ -1,14 +1,19 @@
 const { Post } = require('../models');
 
-const list = async (catName, username) => {
+const list = async (categorySlug) => {
     try {
         let posts;
-        if (username) {
-            posts = await Post.findAll({ username });
-        } else if (catName) {
-            posts = await Post.findAll({ categories: { $in: [catName] } });
+        if (categorySlug) {
+            posts = await Post.findAll({
+                include: { all: true },
+                order: [['createdAt', 'DESC']],
+                where: { '$category.slug$': categorySlug },
+            });
         } else {
-            posts = await Post.findAll();
+            posts = await Post.findAll({
+                include: { all: true },
+                order: [['createdAt', 'DESC']],
+            });
         }
         return posts;
     } catch (ex) {
@@ -18,7 +23,7 @@ const list = async (catName, username) => {
 
 const get = async (postId) => {
     try {
-        return await Post.findByPk(postId);
+        return await Post.findByPk(postId, { include: { all: true } });
     } catch (ex) {
         throw ex;
     }

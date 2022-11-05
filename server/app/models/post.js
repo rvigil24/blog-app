@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate({ Category, User }) {
-            // define association here
+            // CARDINALIDAD:
+
+            // uno a muchos con las categorias
             Post.belongsTo(Category, {
                 as: 'category',
                 onDelete: 'CASCADE',
@@ -21,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
             });
 
+            // uno a muchos con las usuarios
             Post.belongsTo(User, {
                 as: 'user',
                 onDelete: 'CASCADE',
@@ -36,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
             title: DataTypes.STRING,
             desc: DataTypes.TEXT,
             photo: DataTypes.STRING,
-            userId: DataTypes.INTEGER,
-            categoryId: DataTypes.INTEGER,
+            userId: DataTypes.INTEGER, //FK
+            categoryId: DataTypes.INTEGER, //FK
         },
         {
             hooks: {

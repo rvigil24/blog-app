@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { router } = require('./routes/router');
 
 const app = express();
 
 // middlewares
 app.use(express.json());
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // enrutador general de api

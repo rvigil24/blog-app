@@ -9,7 +9,7 @@ postRouter.get('/', postController.getPostsList);
 
 // leer posts por id
 postRouter.get('/:postId', postController.getPostById);
-// console.log(postValidator.createPost);
+
 // crear post
 postRouter.post(
     '/',

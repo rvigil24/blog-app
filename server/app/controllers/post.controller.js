@@ -2,10 +2,9 @@ const { post: postService } = require('../services');
 
 // para obtener lista de posts
 const getPostsList = async (req, res, next) => {
-    const catName = req.query.cat;
-    const username = req.query.user;
+    const categorySlug = req.query.category;
     try {
-        const posts = await postService.list(catName, username);
+        const posts = await postService.list(categorySlug);
         return res.json({
             data: posts,
         });
