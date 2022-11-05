@@ -21,9 +21,21 @@ module.exports = {
             },
             userId: {
                 type: Sequelize.INTEGER,
+                references: {
+                    model: {
+                        tableName: 'users',
+                        name: 'userId',
+                    },
+                },
             },
             categoryId: {
                 type: Sequelize.INTEGER,
+                references: {
+                    model: {
+                        tableName: 'categories',
+                        name: 'categoryId',
+                    },
+                },
             },
             createdAt: {
                 allowNull: false,

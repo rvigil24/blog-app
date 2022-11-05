@@ -1,6 +1,7 @@
 const speakeasy = require('speakeasy');
 const QRCode = require('qrcode');
 
+// generar un codigo base 32 que se agregara posteriormente al google authenticator
 const getTwoFactorAuthenticationCode = () => {
     console.log(
         'process.env.TWO_FACTOR_AUTHENTICATION_APP_NAME,',
@@ -16,6 +17,7 @@ const getTwoFactorAuthenticationCode = () => {
     };
 };
 
+// retornar un codigo QR a nuestro cliente
 const respondWithQRCode = (data, response) => {
     QRCode.toFileStream(response, data);
 };

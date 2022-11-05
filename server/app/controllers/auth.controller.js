@@ -5,6 +5,14 @@ const register = async (req, res) => {
     });
 };
 
+// aqui crearemos login con email y password
+const login = async (req, res) => {};
+
+// aqui colocaremos nuestra creacion del mfa
+const createMfa = async (req, res) => {
+    // retornar el QR Code generado por HTML para el cliente
+};
+
 module.exports = {
     register,
 };
