@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             // muchos a uno posts
             Category.hasMany(Post, {
                 as: 'posts',
+                foreignKey: 'categoryId',
             });
         }
     }

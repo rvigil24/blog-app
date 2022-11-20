@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
                 foreignKey: {
-                    name: 'categoryId',
+                    name: '',
                 },
             });
 
