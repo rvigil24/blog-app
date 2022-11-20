@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-const { mailer } = require('../utils');
+const { mailer, handleHash } = require('../utils');
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         /**
@@ -18,11 +18,16 @@ module.exports = (sequelize, DataTypes) => {
         {
             username: DataTypes.STRING,
             email: DataTypes.STRING,
+            password: DataTypes.STRING,
             imageUrl: DataTypes.STRING,
             mfa: DataTypes.BOOLEAN,
         },
         {
             hooks: {
+                beforeCreate: async (user) => {
+                    const plainPassword = user.password;
+                    user.password = await handleHash.hash(plainPassword);
+                },
                 afterCreate: async (user) => {
                     const to = user.email;
                     const subject = 'Cuenta creada';
