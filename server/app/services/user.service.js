@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+const { handleHash } = require('../utils');
 
 const list = async () => {
     try {
@@ -19,7 +20,7 @@ const getById = async (id) => {
 
 const getByEmail = async (email) => {
     try {
-        return await User.findOne({ email });
+        return await User.findOne({ where: { email } });
     } catch (ex) {
         throw ex;
     }
@@ -47,10 +48,19 @@ const toAuthJson = (user) => {
     };
 };
 
+const comparePassword = async (user, value) => {
+    try {
+        return await handleHash.compare(value, user.password);
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     list,
     create,
     getByEmail,
     getById,
     toAuthJson,
+    comparePassword,
 };

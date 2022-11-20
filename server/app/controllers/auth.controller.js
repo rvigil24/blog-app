@@ -17,7 +17,12 @@ const register = async (req, res, next) => {
 };
 
 // aqui crearemos login con email y password
-const login = async (req, res) => {};
+const login = async (req, res) => {
+    const { user } = req;
+    return res.status(201).json({
+        data: user,
+    });
+};
 
 // aqui colocaremos nuestra creacion del mfa
 const createMfa = async (req, res) => {
@@ -26,4 +31,5 @@ const createMfa = async (req, res) => {
 
 module.exports = {
     register,
+    login,
 };
