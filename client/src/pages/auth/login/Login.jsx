@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Main } from '@layout';
 
 import './login.css';
@@ -12,9 +13,9 @@ export const Login = () => {
             <form className="login-form">
               <div className="form-group">
                 <input
-                  type="text"
+                  type="email"
                   className="form-control rounded-left my-3"
-                  placeholder="Username"
+                  placeholder="Email"
                   required
                 />
               </div>
@@ -33,12 +34,7 @@ export const Login = () => {
                 >
                   Iniciar sesion
                 </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary rounded submit px-5 my-1"
-                >
-                  Iniciar sesion con Google
-                </button>
+                ¿No tienes cuenta? <Link to="/auth/register">Registrate aqui</Link>
               </div>
             </form>
           </div>

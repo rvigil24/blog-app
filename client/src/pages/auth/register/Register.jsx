@@ -1,21 +1,29 @@
+import { Link } from 'react-router-dom';
 import { Main } from '@layout';
+
+import './register.css';
 
 export const Register = () => {
   return (
     <Main>
       <div className="row justify-content-center">
-        <div className="col-md-6 col-lg-5">
+        <div className="col-md-8">
           <div className="login-wrap p-4 p-md-5">
-            <div className="icon d-flex align-items-center justify-content-center">
-              <span className="fa fa-user-o"></span>
-            </div>
-            <h3 className="text-center mb-4">Have an account?</h3>
-            <form action="#" className="login-form">
+            <h3 className="text-center mb-4">Registrarse</h3>
+            <form className="login-form">
               <div className="form-group">
                 <input
                   type="text"
-                  className="form-control rounded-left"
+                  className="form-control rounded-left my-3"
                   placeholder="Username"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="email"
+                  className="form-control rounded-left my-3"
+                  placeholder="Email"
                   required
                 />
               </div>
@@ -27,25 +35,14 @@ export const Register = () => {
                   required
                 />
               </div>
-              <div className="form-group d-md-flex">
-                <div className="w-50">
-                  <label className="checkbox-wrap checkbox-primary">
-                    Remember Me
-                    <input type="checkbox" checked />
-                    <span className="checkmark"></span>
-                  </label>
-                </div>
-                <div className="w-50 text-md-right">
-                  <a href="#">Forgot Password</a>
-                </div>
-              </div>
               <div className="form-group">
                 <button
                   type="submit"
-                  className="btn btn-primary rounded submit p-3 px-5"
+                  className="btn btn-dark rounded submit px-5 mt-3 mb-2"
                 >
-                  Get Started
+                  Registrate
                 </button>
+                ¿Ya tienes cuenta? <Link to="/auth/login">Inicia sesión aquí</Link>
               </div>
             </form>
           </div>
