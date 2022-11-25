@@ -1,28 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = localStorage.getItem('jwt')
+  ? {
+      isLoggedIn: true,
+      token: localStorage.getItem('jwt'),
+    }
+  : {
+      isLoggedIn: false,
+      token: null,
+    };
+
 export const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    isLoggedIn: false,
-    user: null,
-  },
+  initialState,
   reducers: {
     login: (_, { payload }) => {
       return {
         isLoggedIn: true,
-        user: { ...payload },
+        token: payload,
       };
     },
     register: (_, { payload }) => {
       return {
         isLoggedIn: true,
-        user: { ...payload },
+        token: payload,
       };
     },
     logout: (_state, _action) => {
       return {
         isLoggedIn: false,
-        user: null,
+        token: null,
       };
     },
   },

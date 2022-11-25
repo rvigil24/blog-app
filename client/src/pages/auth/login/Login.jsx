@@ -15,7 +15,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (response.token && response.username) {
-      dispatch(login({ ...response }));
+      dispatch(login(response.token));
       history.push('/');
     }
   }, [response]);

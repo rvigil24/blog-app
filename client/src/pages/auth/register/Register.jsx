@@ -15,9 +15,8 @@ export const Register = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(response);
     if (response.token) {
-      dispatch(register({ ...response }));
+      dispatch(login(response.token));
       history.push('/');
     }
   }, [response]);
