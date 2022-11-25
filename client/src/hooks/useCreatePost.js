@@ -14,16 +14,16 @@ export const useCreatePost = () => {
       photo: null,
       categoryId: null,
     },
-    async () => {
+    async (formData) => {
       const form = new FormData();
       if (!title) return setError('Por favor ingrese titulo del post');
       if (!desc) return setError('Por favor ingrese contenido en el post');
       if (!categoryId) {
         return setError('Por favor seleccione una categoria');
       }
-      form.append('title', 'sss');
-      form.append('desc', 'ssasaas');
-      form.append('categoryId', 1);
+      form.append('title', formData.title);
+      form.append('desc', formData.desc);
+      form.append('categoryId', formData.categoryId);
       photo && form.append('photo', photo.files[0]);
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}posts`,
