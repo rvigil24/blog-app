@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Main } from '@layout';
 import { Alert } from '@components/ui';
@@ -11,14 +11,17 @@ import './register.css';
 export const Register = () => {
   const { form, handleSubmit, handleInputChange, error, response } =
     useRegister();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (response.token && response.username) {
+    console.log(response);
+    if (response.token) {
       dispatch(register({ ...response }));
+      history.push('/');
     }
   }, [response]);
-  
+
   return (
     <Main>
       <div className="row justify-content-center">

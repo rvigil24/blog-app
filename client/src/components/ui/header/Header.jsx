@@ -1,6 +1,16 @@
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '@store/slices/auth';
+import { useIsLoggedIn } from '@hooks';
 
 export const Header = () => {
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useIsLoggedIn();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       {/* navbar */}
@@ -28,9 +38,18 @@ export const Header = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/auth/login">
-                  Iniciar sesion
-                </NavLink>
+                {isLoggedIn ? (
+                  <button
+                    className="nav-link btn text-warning"
+                    onClick={handleLogout}
+                  >
+                    Cerrar sesion
+                  </button>
+                ) : (
+                  <NavLink className="nav-link" to="/auth/login">
+                    Iniciar sesion
+                  </NavLink>
+                )}
               </li>
             </ul>
           </div>

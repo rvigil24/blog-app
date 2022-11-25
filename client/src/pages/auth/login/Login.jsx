@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Main } from '@layout';
 import { useLogin } from '@hooks';
@@ -11,10 +11,12 @@ import './login.css';
 export const Login = () => {
   const { form, handleSubmit, handleInputChange, error, response } = useLogin();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (response.token && response.username) {
       dispatch(login({ ...response }));
+      history.push('/');
     }
   }, [response]);
 
