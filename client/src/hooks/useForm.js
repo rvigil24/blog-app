@@ -13,6 +13,7 @@ export const useForm = (fields, onSubmit) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit?.(form);
+    event.target.reset();
   };
 
   return {
