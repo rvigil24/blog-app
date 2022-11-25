@@ -37,20 +37,29 @@ export const Header = () => {
                   Blog
                 </NavLink>
               </li>
-              <li className="nav-item">
-                {isLoggedIn ? (
-                  <button
-                    className="nav-link btn text-warning"
-                    onClick={handleLogout}
-                  >
-                    Cerrar sesion
-                  </button>
-                ) : (
+              {isLoggedIn ? (
+                <>
+                  <li className="nav-item">
+                    <NavLink exact className="nav-link" to="/post/add">
+                      Agregar Post
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="nav-link btn text-warning"
+                      onClick={handleLogout}
+                    >
+                      Cerrar sesion
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <li className="nav-item">
                   <NavLink className="nav-link" to="/auth/login">
                     Iniciar sesion
                   </NavLink>
-                )}
-              </li>
+                </li>
+              )}
             </ul>
           </div>
         </div>
