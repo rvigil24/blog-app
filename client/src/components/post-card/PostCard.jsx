@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { DeletePostBtn } from '@components';
 
 export const PostCard = ({ post }) => {
   return (
@@ -21,9 +22,11 @@ export const PostCard = ({ post }) => {
         </div>
         <h2 className="card-title h4">{post.title}</h2>
         <p className="card-text">{post.desc.slice(0, 180)}...</p>
-        <Link className="btn btn-primary" to={`/post/${post.id}`}>
-          Leer mas →
-        </Link>
+        <div className="d-flex justify-content-between">
+          <Link className="btn btn-primary" to={`/post/${post.id}`}>
+            Leer mas 📝
+          </Link>
+        </div>
       </div>
     </div>
   );

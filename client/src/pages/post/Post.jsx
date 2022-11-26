@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Main } from '@layout';
-import { useFetchData } from '@hooks';
+import { DeletePostBtn } from '@components';
+import { useFetchData, useIsLoggedIn } from '@hooks';
 
 const PostNotFound = () => {
   return (
@@ -13,6 +14,7 @@ const PostNotFound = () => {
 
 export const Post = () => {
   const { postId } = useParams();
+  const { isLoggedIn } = useIsLoggedIn();
   const { data: post, isLoading, errors } = useFetchData(`posts/${postId}`);
   const postNotFound = !post && !isLoading;
 
@@ -42,6 +44,8 @@ export const Post = () => {
                 <div className="badge bg-secondary text-decoration-none link-light my-2">
                   {post.category?.name}
                 </div>
+
+                {isLoggedIn && <DeletePostBtn postId={post.id} />}
               </header>
               {/* Preview image figure */}
               <figure className="mb-4">
